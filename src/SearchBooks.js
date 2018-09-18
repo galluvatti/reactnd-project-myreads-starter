@@ -9,19 +9,12 @@ class SearchBooks extends Component {
         availableBooks: []
     }
 
-    componentDidMount() {
-        BooksAPI.getAll().then((books) => {
-            console.log(books)
-            this.setState({availableBooks: books})
-        })
-    }
-
     updateQuery = (value) => {
         let queryString = value.trim();
         if (queryString.length > 0) {
             BooksAPI.search(queryString).then((books) => {
                 console.log(books)
-                this.setState({availableBooks: books})
+                this.setState({query: value.trim(), availableBooks: books})
             })
         }
         this.setState({query: queryString})
@@ -29,6 +22,7 @@ class SearchBooks extends Component {
 
     render() {
         const {query} = this.state;
+
 
         return (
             <div className="search-books">
