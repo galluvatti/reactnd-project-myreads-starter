@@ -15,12 +15,11 @@ class Book extends Component {
 
     render() {
         const {book} = this.props
-
         return (
             <div className="book">
                 <div className="book-top">
                     <div className="book-cover"
-                         style={{width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
+                         style={{width: 128, height: 193, backgroundImage: book.imageLinks && `url(${book.imageLinks.thumbnail})`}}></div>
                     <div className="book-shelf-changer">
                         <select value={book.shelf} onChange={(event) => {this.handleChangeShelf(event, book)}}>
                             <option value="move" disabled>Move to...</option>
