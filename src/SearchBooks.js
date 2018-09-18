@@ -10,19 +10,20 @@ class SearchBooks extends Component {
     }
 
     updateQuery = (value) => {
-        let queryString = value.trim();
-        if (queryString.length > 0) {
+        const queryString = value.trim();
+        if (queryString && queryString.length > 0) {
             BooksAPI.search(queryString).then((books) => {
                 console.log(books)
-                this.setState({query: value.trim(), availableBooks: books})
+                this.setState({query: value, availableBooks: books.length > 0 ? books : []})
             })
         }
-        this.setState({query: queryString})
+        else {
+            this.setState({query: '', books: []})
+        }
     }
 
     render() {
         const {query} = this.state;
-
 
         return (
             <div className="search-books">
